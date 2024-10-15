@@ -28,40 +28,40 @@ status_right_bg=${g1}
 status_right_fg=${fg}
 
 # set -g status-left '#{?client_prefix,#[fg='$yw' bg='$g1'],#[fg='$g3' bg='$g1']}'
-set -g status-left '#{?client_prefix,#[fg='$session_bg_cmd' bg='$bg'],#[fg='$session_bg' bg='$bg']}'
+set -g status-left '#{?client_prefix,#[fg='$session_bg_cmd' bg='default'],#[fg='$session_bg' bg='default']}'
 set -ga status-left '#{?client_prefix,#[fg='$bg' bg='$session_bg_cmd'],#[fg='$bg' bg='$session_bg']}'
 set -ga status-left ' #S '
-set -ga status-left '#{?client_prefix,#[fg='$session_bg_cmd' bg='$bg'],#[fg='$session_bg' bg='$bg']} '
+set -ga status-left '#{?client_prefix,#[fg='$session_bg_cmd' bg='default'],#[fg='$session_bg' bg='default']} '
 
-set -g window-style fg="$fg",bg="$bg"
-set -g window-active-style fg="$fg,"bg="$bg"
+set -g window-style fg="$fg"
+set -g window-active-style fg="$fg"
 
-set -g status-style fg="$fg",bg="$bg"
-set -g window-status-style fg="$g5",bg="$bg"
+set -g status-style fg="$fg"
+set -g window-status-style fg="$g5"
 set -g window-status-format '  #I #W  '
 
-set -g window-status-current-format '#[fg='$window_current_bg' bg='$bg']'
+set -g window-status-current-format '#[fg='$window_current_bg' bg='default']'
 set -ga window-status-current-format '#{?window_zoomed_flag,#[fg='$fg' bg='$window_current_bg'],#[fg='$fg' bg='$window_current_bg']} #I #W '
-set -ga window-status-current-format '#[fg='$window_current_bg' bg='$bg']'
+set -ga window-status-current-format '#[fg='$window_current_bg' bg='default']'
 
 # set -g window-status-current-style fg="$fg,"bg="$bg"
-set -g pane-active-border-style fg="$g5,"bg="$bg"
-set -g pane-border-style fg="$g4,"bg="$bg"
+set -g pane-active-border-style fg="$g5"
+set -g pane-border-style fg="$g4"
 
-# left_sep = '#[fg='$g4' bg='$bg']'
-# right_sep = '#[fg='$g4' bg='$bg']'
+# left_sep = '#[fg='$g4' bg='default']'
+# right_sep = '#[fg='$g4' bg='default']'
 
-set -g status-right '#[fg='$status_right_bg' bg='$bg']'
+set -g status-right '#[fg='$status_right_bg' bg='default']'
 set -ga status-right '#[fg='$status_right_fg' bg='$status_right_bg']#(~/bin/tmux/tmux_hostname)'
-set -ga status-right '#[fg='$status_right_bg' bg='$bg'] '
-set -ga status-right '#[fg='$status_right_bg' bg='$bg']'
+set -ga status-right '#[fg='$status_right_bg' bg='default'] '
+set -ga status-right '#[fg='$status_right_bg' bg='default']'
 # 󰅐 󰃭
 set -ga status-right '#[fg='$status_right_fg' bg='$status_right_bg']󰅐 %H:%M 󰃭 %b-%d-%y'
-set -ga status-right '#[fg='$status_right_bg' bg='$bg'] '
-set -ga status-right '#[fg='$status_right_bg' bg='$bg']'
+set -ga status-right '#[fg='$status_right_bg' bg='default'] '
+set -ga status-right '#[fg='$status_right_bg' bg='default']'
 set -ga status-right '#[bg='$status_right_bg']#(~/bin/tmux/tmux_pia_state)#[fg='$fg' bg='$status_right_bg']'
 set -ga status-right '#(~/bin/tmux/tmux_battery)#[fg='$fg' bg='$g3']'
-set -ga status-right '#[fg='$status_right_bg' bg='$bg']'
+set -ga status-right '#[fg='$status_right_bg' bg='default']'
 
 #(~/bin/tmux/tmux_battery)"
 # 
