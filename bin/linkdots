@@ -11,97 +11,84 @@ BACKUP=$DOTFILESPATH/dotfiles/dots_back
 TEST=0
 if [ $TEST == 1 ]; then
   BACKUP="/tmp/linkdots_test/dots_back/"
-  [ $BACKUP == "/tmp/linkdots_test/dots_back" ] && mkdir "$BACKUP"
+  [ $BACKUP == "/tmp/linkdots_test/dots_back" ] && mkdir -p "$BACKUP"
   DST="/tmp/linkdots_test/dot"
-  [ $DST == "/tmp/linkdots_test/dot" ] && mkdir "$DST"
-  echo "backup = " $BACKUP
-  echo "dst = " $DST
-  echo "src = " $SRC
+  [ $DST == "/tmp/linkdots_test/dot" ] && mkdir -p "$DST"
+  echo "backup = $BACKUP"
+  echo "dst = $DST"
+  echo "src = $SRC"
 fi
 
 cd $SRC
 
-# git files to link
-DOTS=(vim
-  nvim
-  shells/zsh/zshrc
-  shells/zsh/zshenv
-  shells/zsh/zsh_aliases
-  shells/xterm/Xresources
-  shells/bash/bashrc
-  shells/bash/bash_aliases
-  inputrc
-  tmux/tmux.conf
-  bin
-  git/config
-  git/git_template
-  fonts
-  ssh/ssh_config
-  shells/alacritty/alacritty.yml)
-
-# links to create locally
-LINK=(.vim
-  .config/nvim
-  .zshrc
-  .zshenv
-  .zsh_aliases
-  .Xresources
-  .bashrc
-  .bash_aliases
-  .inputrc
-  .tmux.conf
-  bin
-  .config/git/config
-  .git_template
-  .fonts
-  .ssh/config
-  .config/alacritty/alacritty.yml)
+# [dotfile]=link
+declare -A dot_links=(
+  ["vim"]=.vim
+  ["nvim"]=.config/nvim
+  ["shells/zsh/zshrc"]=.zshrc
+  ["shells/zsh/zshenv"]=.zshenv
+  ["shells/zsh/zsh_aliases"]=.zsh_aliases
+  ["shells/xterm/Xresources"]=.Xresources
+  ["shells/bash/bashrc"]=.bashrc
+  ["shells/bash/bash_aliases"]=.bash_aliases
+  ["inputrc"]=.inputrc
+  ["tmux/tmux.conf"]=.tmux.conf
+  ["bin"]=bin
+  ["git/config"]=.config/git/config
+  ["git/git_template"]=.git_template
+  ["fonts"]=.fonts
+  ["ssh/ssh_config"]=.ssh/config
+  ["shells/alacritty/alacritty.yml"]=.config/alacritty/alacritty.yml
+  ["autostart/tmux_server.desktop"]=.config/autostart/tmux_server.desktop
+  ["autostart/tmux_theme_sync.desktop"]=.config/autostart/tmux_theme_sync.desktop
+)
 
 if [ -d "$SRC" ]; then
-  echo "Not cloning : $SRC exists"
+  echo "Not cloning: $SRC exists"
 else
   git clone $GITURL $SRC
 fi
 
 if [ "$1" == "--git" ] || [ "$1" == "-g" ] || [ "$1" == "--plugins" ]; then
   echo "Cloning plugins"
-  cd "${DOT[0]}"
+  cd "${dot_links[vim]}"
   git submodule init
   git submodule update
 else
   echo "Plugins already installed"
 fi
 
-i=0
-for f in "${DOTS[@]}"; do
-  l="${LINK[i]}"
-  echo "$i $l"
-  cmp -s "$SRC/$f" "$DST/$l"
-  if [ $? -eq 1 ] && [ -n "$l" ] && [ -e "$DST/$l" ]; then
+# Iterate over each key-value pair in the associative array
+for dot in "${!dot_links[@]}"; do
+  link="$DST/${dot_links[$dot]}"
+  dot="$SRC/$dot"
+  echo "Linking $dot to $link"
+
+  cmp -s $dot $link
+  if [ $? -eq 1 ] && [ -n "$link" ] && [ -e $link ]; then
     echo "backing up..."
-    lback=$l
-    if [ -e "$BACKUP/$l" ] && [ -n "$l" ]; then
+    lback=$link
+    if [ -e "$BACKUP/$lback" ] && [ -n "$lback" ]; then
       j=0
-      while [ -e "$BACKUP/$lback/" ]; do
+      while [ -e "$BACKUP/$lback$j" ]; do
         let j=j+1
-        echo "$BACKUP/$lback exists, new backup file"
-        BACKUP="$BACKUP/$lback$j"
-        echo "$BACKUP/$lback$j new backup"
+        echo "$BACKUP/$lback$j exists, new backup file"
       done
+      lback="$lback$j"
     fi
-    if [ -d $DST/$l ]; then
+    if [ -d $link ]; then
       mkdir -p "$BACKUP/$lback"
-      mv "$DST/$l/*" "$BACKUP/$lback"
+      mv $link/* "$BACKUP/$lback/"
     else
-      mv "$DST/$l" "$BACKUP/$lback"
+      mv $link "$BACKUP/$lback"
     fi
-    echo "save '$l' to '$BACKUP/$lback'"
+    echo "Saved '$link' to '$BACKUP/$lback'"
   fi
-  if [ ! -e "$DST/$l" ]; then
-    linkparent=$(echo $DST/$l | sed 's/\(\/.*\/\).*/\1/')
-    ! [ -d $linkparent ] && mkdir -p $linkparent
-    ln -fs "$SRC/$f" "$DST/$l"
-    echo "link created : $l -> $f "
+
+  if [ ! -e $link ]; then
+    linkparent=$(dirname $link)
+    ! [ -d "$linkparent" ] && mkdir -p "$linkparent"
+    ln -fs $dot $link
+    echo "Link created: $link -> $dot"
   fi
-  let i=i+1
 done
