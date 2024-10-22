@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=TmuxServer
+GenericName=TmuxServer
+Comment=Start Tmux server
+Exec=tmux start-server
+Terminal=false
+Type=Application
+X-GNOME-Autostart-enabled=true

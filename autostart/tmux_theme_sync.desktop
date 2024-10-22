@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=TmuxThemeSync
+GenericName=TmuxThemeSync
+Comment=Sync Tmux theme with Gnome theme
+Exec=/home/trx/dotfiles/tmux/tmux_gnome_theme_sync
+Terminal=false
+Type=Application
+X-GNOME-Autostart-enabled=true
