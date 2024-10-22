@@ -31,6 +31,9 @@ declare -A dot_links=(
   ["shells/xterm/Xresources"]=.Xresources
   ["shells/bash/bashrc"]=.bashrc
   ["shells/bash/bash_aliases"]=.bash_aliases
+  ["shells/alacritty/alacritty.yml"]=.config/alacritty/alacritty.yml
+  ["shells/wezterm"]=.config/wezterm
+  ["shells/starship/starship.toml"]=.config/starship.toml
   ["inputrc"]=.inputrc
   ["tmux/tmux.conf"]=.tmux.conf
   ["bin"]=bin
@@ -38,7 +41,6 @@ declare -A dot_links=(
   ["git/git_template"]=.git_template
   ["fonts"]=.fonts
   ["ssh/ssh_config"]=.ssh/config
-  ["shells/alacritty/alacritty.yml"]=.config/alacritty/alacritty.yml
   ["autostart/tmux_server.desktop"]=.config/autostart/tmux_server.desktop
   ["autostart/tmux_theme_sync.desktop"]=.config/autostart/tmux_theme_sync.desktop
 )
