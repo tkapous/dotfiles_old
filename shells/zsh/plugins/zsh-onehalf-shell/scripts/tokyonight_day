@@ -34,28 +34,28 @@ marker:#9854f1"
 # g4="#8990b3" -- dark3
 # g5="#68709a" -- dark5
 
-color00="22/24/36" # Base 00 - black
-color01="f5/2a/65" # Base 08 - red
-color02="58/75/39" # Base 0B - green
-color03="8c/6c/3e" # Base 0A - yellow
-color04="2e/7d/e9" # Base 0D - blue
-color05="98/54/f1" # Base 0E - magenta
-color06="00/6a/83" # Base 0C - cyan
-color07="e1/e2/e7" # Base 05 - white
-color08="c4/c8/da" # Base 03 - bright black
-color09=$color01   # Base 08 - bright red
-color10=$color02   # Base 0B - bright green
-color11=$color03   # Base 0A - bright yellow
-color12=$color04   # Base 0D - bright blue
-color13=$color05   # Base 0E - bright magenta
-color14=$color06   # Base 0C - bright cyan
-color15="61/72/b0" # Base 07 - bright white
-color16="b1/5c/00" # Base 09 - orange
-color17="c6/43/43" # Base 0F - red
-color18="a8/ae/cb" # Base 01
-color19="92/a6/d5" # Base 02
-color20="89/90/b3" # Base 04
-color21="68/70/9a" # Base 06
+color00="22/24/36"        # Base 00 - black
+color01="f5/2a/65"        # Base 08 - red
+color02="58/75/39"        # Base 0B - green
+color03="8c/6c/3e"        # Base 0A - yellow
+color04="2e/7d/e9"        # Base 0D - blue
+color05="98/54/f1"        # Base 0E - magenta
+color06="00/6a/83"        # Base 0C - cyan
+color07="e1/e2/e7"        # Base 05 - white
+color08="c4/c8/da"        # Base 03 - bright black
+color09=$color01          # Base 08 - bright red
+color10=$color02          # Base 0B - bright green
+color11=$color03          # Base 0A - bright yellow
+color12=$color04          # Base 0D - bright blue
+color13=$color05          # Base 0E - bright magenta
+color14=$color06          # Base 0C - bright cyan
+color15="61/72/b0"        # Base 07 - bright white
+color16="b1/5c/00"        # Base 09 - orange
+color17="c6/43/43"        # Base 0F - red
+color18="a8/ae/cb"        # Base 01
+color19="92/a6/d5"        # Base 02
+color20="89/90/b3"        # Base 04
+color21="68/70/9a"        # Base 06
 color_foreground=$color06 # Base 05
 color_background=$color07 # Base 00
 
@@ -82,16 +82,16 @@ else
 fi
 
 # 16 color space
-put_template 0  $color_background
-put_template 1  $color01
-put_template 2  $color02
-put_template 3  $color03
-put_template 4  $color04
-put_template 5  $color05
-put_template 6  $color06
-put_template 7  $color_foreground
-put_template 8  $color08
-put_template 9  $color09
+put_template 0 $color_background
+put_template 1 $color01
+put_template 2 $color02
+put_template 3 $color03
+put_template 4 $color04
+put_template 5 $color05
+put_template 6 $color06
+put_template 7 $color_foreground
+put_template 8 $color08
+put_template 9 $color09
 put_template 10 $color10
 put_template 11 $color11
 put_template 12 $color12
@@ -109,10 +109,10 @@ put_template 21 $color21
 
 put_template_var 10 $color_foreground
 if [ "$BASE16_SHELL_SET_BACKGROUND" != false ]; then
-	put_template_var 11 $color_background
-	if [ "${TERM%%-*}" = "rxvt" ]; then
-		put_template_var 708 $color_background # internal border (rxvt)
-	fi
+  put_template_var 11 $color_background
+  if [ "${TERM%%-*}" = "rxvt" ]; then
+    put_template_var 708 $color_background # internal border (rxvt)
+  fi
 fi
 put_template_custom 12 ";7" # cursor (reverse video)
 
@@ -144,5 +144,3 @@ unset color20
 unset color21
 unset color_foreground
 unset color_background
-
-
