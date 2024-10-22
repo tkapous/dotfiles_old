@@ -31,11 +31,11 @@ multiplier = 3
 builtin_box_drawing = true
 size = 13
 
-offset.x = 0
-offset.y = 0
-
-glyph_offset.x = 0
-glyph_offset.y = 0
+## custom line height
+# offset.x = 0
+# offset.y = 10
+# glyph_offset.x = 0
+# glyph_offset.y = 5
 
 [font.normal]
 family = "JetBrainsMono NF"
