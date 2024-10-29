@@ -13,7 +13,7 @@ else
   export MANPAGER="/bin/sh -c \"col -b | vim -c 'set ft=man ts=8 readonly nomodified nomodifiable' -\""
 fi
 
-SUDO_ASKPASS=/usr/lib/ssh/gnome-ssh-askpass3
+export SUDO_ASKPASS=/usr/lib/ssh/gnome-ssh-askpass4
 export EDITOR=nvim
 export BROWSER=firefox
 
