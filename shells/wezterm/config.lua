@@ -10,7 +10,13 @@ config = {
 	-- default_prog = { "nvim", "-c", "term" },
 	color_scheme_dirs = { "~/.local/share/nvim/lazy/tokyonight.nvim/extras/wezterm" },
 	enable_wayland = true,
-	line_height = 1.2,
+	line_height = 1.3,
+	window_padding = {
+		left = 8,
+		right = 6,
+		top = 10,
+		bottom = 10,
+	},
 	-- font = wezterm.font("JetBrainsMono NF", { weight = "Regular", stretch = "UltraExpanded" }),
 	-- font = wezterm.font("UbuntuMono Nerd Font Mono", { weight = "Regular", stretch = "Normal" }),
 	font = wezterm.font("JetBrainsMono NF"),
@@ -27,12 +33,6 @@ config = {
 		cursor_bg = "#b4b4b4",
 	},
 	window_background_opacity = 0.9,
-	window_padding = {
-		left = 8,
-		right = 8,
-		top = 8,
-		bottom = 8,
-	},
 	-- <alt--> to increase window opacity
 	keys = {
 		{ key = "UpArrow", mods = "SHIFT", action = wezterm.action.ScrollByPage(-0.1) },
