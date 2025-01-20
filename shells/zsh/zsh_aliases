@@ -15,15 +15,28 @@ alias s='sudo'
 alias c='clear'
 alias q='exit'
 
+## $EDITOR
 alias sv='sudoedit'
 alias se='sudoedit'
 
 alias vim="vim -X"
 alias v="$VISUAL"
+
 #vi debug: no vimrc/gvimrc, nocompatible
 alias vimnude='$VISUAL -u NONE -U NONE -N'
 alias vims='$VISUAL -S .git/Session.vim'
 alias vs='$VISUAL -S .git/Session.vim'
+
+#nvim debug: no vimrc/gvimrc, nocompatible
+alias nvimnude='$VISUAL -u NONE -U NONE -N'
+alias nvims='$VISUAL -S .git/Session.vim'
+alias nvs='$VISUAL -S .git/Session.vim'
+alias nv='$VISUAL'
+
+#nvim minimal test config (for plugin debugging)
+alias nvimtest='NVIM_APPNAME=nvim/debugconf/ nvim'
+alias nvimt=nvimtest
+alias nt=nvimtest
 
 ## color
 alias dir='dir --color=auto'
