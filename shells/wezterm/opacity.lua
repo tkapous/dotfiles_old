@@ -11,12 +11,13 @@ local function scale_factor(value, up)
 	if scale > 0.99 then
 		scale = 0.99
 	end
-	return up and 1 + scale or 1 - scale
+	scale = up and scale or -scale
+	return 1 + scale
 end
 
 --- @param value number
 --- @param delta number
-local scale_value = function(value, delta)
+local function scale_value(value, delta)
 	value = value * delta
 	if value < 0.1 then
 		value = 0.1
@@ -36,7 +37,7 @@ end
 --- @param window table
 --- @param up boolean
 local function scale_window_opacity(window, up)
-	local overrides = window:get_config_overrides() or {}
+	local overrides = window:get_config_overrides()
 	local opacity = overrides.window_background_opacity or config.window_background_opacity
 	overrides.window_background_opacity = scale_opacity(opacity, up)
 	window:set_config_overrides(overrides)
