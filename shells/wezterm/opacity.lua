@@ -1,16 +1,18 @@
 local wezterm = require("wezterm")
 local config = require("config")
 
+---@param value number
+---@param min number
+---@param max number
+local function minmax(value, min, max)
+	return math.min(math.max(value, min), max)
+end
+
 --- @param value number
 --- @param up boolean
 local function scale_factor(value, up)
 	local scale = (1 - value) * 0.1
-	if scale < 0.005 then
-		scale = 0.005
-	end
-	if scale > 0.99 then
-		scale = 0.99
-	end
+	scale = minmax(scale, 0.005, 0.99)
 	scale = up and scale or -scale
 	return 1 + scale
 end
