@@ -38,23 +38,48 @@ end
 
 --- @param window table
 --- @param up boolean
-local function scale_window_opacity(window, up)
+--- @param onchange? function
+local function scale_window_opacity(window, up, onchange)
 	local overrides = window:get_config_overrides()
 	local opacity = overrides.window_background_opacity or config.window_background_opacity
 	overrides.window_background_opacity = scale_opacity(opacity, up)
 	window:set_config_overrides(overrides)
+	if onchange then
+		onchange(overrides.window_background_opacity)
+	end
+end
+
+-- track the opacity set by the user via so we can use it on toggle
+local opacity_save = config.window_background_opacity
+
+---@param window table
+local function toggle_opacity(window)
+	local overrides = window:get_config_overrides()
+	local opacity = overrides.window_background_opacity
+	local new_opacity = opacity < 1 and 1 or opacity_save or config.window_background_opacity
+	overrides.window_background_opacity = new_opacity
+	window:set_config_overrides(overrides)
+end
+
+---@param window table
+local function reset_opacity(window)
+	local overrides = window:get_config_overrides()
+	overrides.window_background_opacity = config.window_background_opacity or 1
+	window:set_config_overrides(overrides)
+end
+
+local function onOpacityChange(opacity)
+	opacity_save = opacity
 end
 
 wezterm.on("dec-opacity", function(window)
-	scale_window_opacity(window, false)
+	scale_window_opacity(window, false, onOpacityChange)
 end)
 
 wezterm.on("inc-opacity", function(window)
-	scale_window_opacity(window, true)
+	scale_window_opacity(window, true, onOpacityChange)
 end)
 
-wezterm.on("reset-opacity", function(window)
-	local overrides = window:get_config_overrides() or {}
-	overrides.window_background_opacity = 1.0
-	window:set_config_overrides(overrides)
-end)
+wezterm.on("toggle-opacity", toggle_opacity)
+
+wezterm.on("reset-opacity", reset_opacity)
