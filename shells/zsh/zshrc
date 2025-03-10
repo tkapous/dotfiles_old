@@ -115,12 +115,13 @@ bindkey '^b' backward-char
 bindkey '^f' forward-char
 bindkey '^a' beginning-of-line
 bindkey '^e' end-of-line
-bindkey '^j' history-search-forward
-bindkey '^k' history-search-backward
+bindkey '^i' history-search-forward
+bindkey '^o' history-search-backward
 bindkey '^[[B' history-search-forward
 bindkey '^[[A' history-search-backward
 bindkey '^l' clear-screen
-bindkey '^o' expand-or-complete
+bindkey '^j' fzf-completion
+bindkey '^k' expand-or-complete
 bindkey '^n' accept-and-infer-next-history
 bindkey '^u' backward-kill-word
 bindkey '^ ' autosuggest-accept
@@ -155,8 +156,8 @@ bindkey -M menuselect '^o' reverse-menu-complete
 bindkey -a 'H' beginning-of-line
 bindkey -a 'L' end-of-line
 
-zvm_after_init_commands+=('bindkey "^j" history-search-forward')
-zvm_after_init_commands+=('bindkey "^k" history-search-backward')
+zvm_after_init_commands+=('bindkey "^i" history-search-forward')
+zvm_after_init_commands+=('bindkey "^o" history-search-backward')
 zvm_after_init_commands+=('bindkey "^n" accept-and-infer-next-history')
 # zvm_after_init_commands+=('FZF_ALT_C_COMMAND= FZF_CTRL_T_COMMAND= source <(fzf --zsh)')
 FZF_ALT_C_COMMAND= FZF_CTRL_T_COMMAND= source <(fzf --zsh)
