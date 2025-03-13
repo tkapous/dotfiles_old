@@ -1,7 +1,6 @@
 #!/bin/sh
 
 theme="onehalf-darkest"
-echo "$theme" > ~/.config/onehalf-theme
 export FZF_DEFAULT_OPTS='--color dark'
 
 color00="18/1a/1f" # Base 00 - Black

@@ -68,8 +68,6 @@ alias onehalf-lightdim='source onehalf-lightdim'
 alias d='source day'
 alias n='source night'
 
-alias onehalf='source $(cat ~/.config/onehalf-theme)'
-
 # ls
 if [ -x "$(command -v eza)" ]; then
   # eza

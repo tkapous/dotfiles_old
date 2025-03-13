@@ -98,14 +98,6 @@ ZSH_HIGHLIGHT_STYLES[path_prefix]=none
 source "$DOT/shells/zsh/plugins/zsh-pluginsourcer/zsh-pluginsourcer.zsh"
 # exec "~/dotfiles/shells/zsh/plugins/zsh-gnome-theme-sync/gnome_theme_monitor.plugin.zsh"
 
-if [ -n "$HOME/.config/onehalf-theme" ] ; then
-	scheme=$(cat "$HOME/.config/onehalf-theme")
-	# echo "source $scheme"
-	source "$scheme"
-elif $(type -p "onehalf-dark") ; then
-	source onehalf-dark
-fi
-
 # complete menu mode mappings
 zmodload zsh/complist
 
