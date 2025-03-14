@@ -7,8 +7,6 @@ end
 require("colorscheme")
 
 config = {
-	-- default_prog = { "nvim", "-c", "term" },
-	color_scheme_dirs = { "~/.local/share/nvim/lazy/tokyonight.nvim/extras/wezterm" },
 	enable_wayland = true,
 	line_height = 1.3,
 	window_padding = {
