@@ -1,12 +1,8 @@
 local wezterm = require("wezterm")
-local config = {}
-if wezterm.config_builder then
-	config = wezterm.config_builder()
-end
 
-require("colorscheme")
+local M = wezterm.config_builder() or {}
 
-config = {
+M = {
 	enable_wayland = true,
 	line_height = 1.3,
 	window_padding = {
@@ -47,4 +43,4 @@ config = {
 	},
 }
 
-return config
+return M
