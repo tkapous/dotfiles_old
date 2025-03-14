@@ -63,8 +63,9 @@ end
 
 ---@param window table
 local function toggle_opacity(window)
-  local overrides = window:get_config_overrides().window_background_opacity
-  overrides.window_background_opacity = overrides.window_background_opacity < 1 and 1 or M.opacity
+  local overrides = window:get_config_overrides()
+  local opacity = overrides.window_background_opacity or M.opacity or 1
+  overrides.window_background_opacity = opacity < 1 and 1 or M.opacity
   window:set_config_overrides(overrides)
 end
 
