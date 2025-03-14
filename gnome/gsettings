@@ -1,0 +1,1 @@
+gsettings set org.gnome.desktop.wm.keybindings close "['<Super>w', '<Alt>F4']"
