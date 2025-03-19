@@ -27,7 +27,6 @@ M = {
 		cursor_bg = "#b4b4b4",
 	},
 	window_background_opacity = 0.9,
-	-- <alt--> to increase window opacity
 	keys = {
 		{ key = "UpArrow", mods = "SHIFT", action = wezterm.action.ScrollByPage(-0.1) },
 		{ key = "DownArrow", mods = "SHIFT", action = wezterm.action.ScrollByPage(0.1) },
