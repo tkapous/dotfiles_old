@@ -3,9 +3,9 @@ local wezterm = require("wezterm")
 local themes = {
 	Default = "tokyonight_day",
 	Light = "tokyonight_day",
-	Dark = "tokyonight_dark_moon",
+	Dark = "tokyonight_soft_moon",
 	LightHighContrast = "tokyonight_day",
-	DarkHighContrast = "tokyonight_dark_moon",
+	DarkHighContrast = "tokyonight_soft_moon",
 }
 
 local function change_theme(window)
