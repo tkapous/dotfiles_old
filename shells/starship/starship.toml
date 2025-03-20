@@ -103,9 +103,9 @@ symbol = " "
 
 [character]
 format = "$symbol "
-success_symbol = "[](bold bright-green)"
+success_symbol = "[](bold green)"
 error_symbol = "[](bold red)"
-vimcmd_symbol = "[](bold bright-blue)"
+vimcmd_symbol = "[](bold blue)"
 
 [env_var.VIMSHELL] # vim subshell
 format = "[$env_value]($style)"
@@ -119,8 +119,8 @@ symbol = " "
 disabled = false
 
 [username]
-style_user = "fg:cyan bold bg:bright-black"
-style_root = "fg:yellow bold bg:bright-black"
+style_user = "fg:bright-blue bg:bright-black"
+style_root = "fg:yellow bg:bright-black"
 format = "[](fg:bright-black)[ $user ]($style)"
 show_always = true
 
@@ -129,7 +129,7 @@ ssh_only = false
 # trim_at = "."
 ssh_symbol = " "
 format = '[󰍹 $ssh_symbol$hostname]($style)[](fg:bright-black)'
-style = "bold dimmed fg:bright-green bg:bright-black"
+style = "fg:green bg:bright-black"
 
 [directory]
 home_symbol = "~"
@@ -143,10 +143,10 @@ format = ' [$path]($style)[$read_only]($read_only_style)'
 [status]
 format = "[$symbol]($style)"
 symbol = "[ $status](bright-red)"
-success_symbol = "[ $status](bright-green)"
+success_symbol = "[ $status](green)"
 disabled = false
 not_executable_symbol = "[](bright-orange) "
-not_found_symbol = "[](bright-purple)"
+not_found_symbol = "[](purple)"
 sigint_symbol = ""
 signal_symbol = ""
 
@@ -216,7 +216,7 @@ symbol = "⨀ "
 style = "bright-yellow"
 
 [nodejs]
-format = " node [◫ ($version)](bright-green)"
+format = " node [◫ ($version)](green)"
 detect_files = ["package-lock.json", "yarn.lock"]
 version_format = "${major}.${minor}"
 
