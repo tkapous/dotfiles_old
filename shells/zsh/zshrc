@@ -1,26 +1,14 @@
-###########################################################
-#   ______  _____  ______  ______ __   __ ______  _____   #
-#   |_____]   |   |  ____ |  ____   \_/   |_____]   |	    #
-#   |_____] __|__ |_____| |_____|    |    |_____] __|__   #
-#												   zshrc                          #
-###########################################################
+# main settings
 
-# # environment
-# if [ -n "$ZSH_ENV" ]; then source "$ZSH_ENV"; fi
+## shell options
+unsetopt BEEP               # bell off
+setopt EXTENDED_HISTORY     # save start time and duration
+setopt INC_APPEND_HISTORY   # update history when command is issued
+setopt HIST_IGNORE_ALL_DUPS # hide duplicates in history
+setopt HIST_IGNORE_SPACE    # hide commands starting with spaces
+stty -ixon # Disable shell scroll interrupt
 
-# # per command profiling
-# zmodload zsh/zprof
-
-# # per function profiling
-# zmodload zsh/datetime
-# setopt promptsubst
-# PS4='+$EPOCHREALTIME %N:%i'
-# exec 3>&2 2> /tmp/zsh_startlog.$$
-# setopt xtrace prompt_subst
-
-# $HOME/bin/gnome_theme_monitor &
-
-# emit osc7 escape sequence
+## emit osc7 escape sequence (change dir)
 function print_osc7() {
     if [ "$ZSH_SUBSHELL" -eq 0 ] ; then
         printf "\033]7;file://$HOST/$PWD\033\\"
@@ -30,95 +18,119 @@ autoload -Uz add-zsh-hook
 add-zsh-hook -Uz chpwd print_osc7
 print_osc7
 
-# aliases
-if [ -f "$HOME/.zsh_aliases" ]; then source "$HOME/.zsh_aliases"; fi
+## Autocompletion
+autoload -Uz compinit promptinit # load completion
+compinit
+promptinit
+_comp_options+=(globdots)        # include hidden files
+zmodload zsh/complist
 
-# 'command not found' (package suggestion) from `pkgfile`
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' # case insensitive
+zstyle ':completion:*' menu select                        # use menu
+zstyle ':completion::complete:*' gain-privileges 1        # in privileged environment
+zstyle -e ':completion:*:default' list-colors\
+  'reply=("${PREFIX:+=(#bi)($PREFIX:t)(?)*==94=34}:${(s.:.)LS_COLORS}")' # menu colors
+
+## Bash style 'word' ('/' is not a keyword)
+autoload -U select-word-style
+select-word-style bash
+
+## Vi mode
+bindkey -v
+DEFAULT_VI_MODE=viins
+KEYTIMEOUT=1
+stty erase "^?"
+
+## cursor shape
+function zle-keymap-select {
+  if [[ ${KEYMAP} == vicmd ]] || [[ $1 = 'block' ]]; then
+    echo -ne '\e[1 q'  # Block cursor
+  else
+    echo -ne '\e[5 q'  # Thin cursor
+  fi
+}
+zle -N zle-keymap-select
+zle-keymap-select
+
+## special keys `https://wiki.archlinux.org/title/Zsh#Key_bindings`
+typeset -g -A key
+key[Home]="${terminfo[khome]}"
+key[End]="${terminfo[kend]}"
+key[Insert]="${terminfo[kich1]}"
+key[Backspace]="${terminfo[kbs]}"
+key[Delete]="${terminfo[kdch1]}"
+key[Up]="${terminfo[kcuu1]}"
+key[Down]="${terminfo[kcud1]}"
+key[Left]="${terminfo[kcub1]}"
+key[Right]="${terminfo[kcuf1]}"
+key[PageUp]="${terminfo[kpp]}"
+key[PageDown]="${terminfo[knp]}"
+key[Shift-Tab]="${terminfo[kcbt]}"
+[[ -n "${key[Home]}"      ]] && bindkey -- "${key[Home]}"       beginning-of-line
+[[ -n "${key[End]}"       ]] && bindkey -- "${key[End]}"        end-of-line
+[[ -n "${key[Insert]}"    ]] && bindkey -- "${key[Insert]}"     overwrite-mode
+[[ -n "${key[Backspace]}" ]] && bindkey -- "${key[Backspace]}"  backward-delete-char
+[[ -n "${key[Delete]}"    ]] && bindkey -- "${key[Delete]}"     delete-char
+[[ -n "${key[Up]}"        ]] && bindkey -- "${key[Up]}"         up-line-or-history
+[[ -n "${key[Down]}"      ]] && bindkey -- "${key[Down]}"       down-line-or-history
+[[ -n "${key[Left]}"      ]] && bindkey -- "${key[Left]}"       backward-char
+[[ -n "${key[Right]}"     ]] && bindkey -- "${key[Right]}"      forward-char
+[[ -n "${key[PageUp]}"    ]] && bindkey -- "${key[PageUp]}"     beginning-of-buffer-or-history
+[[ -n "${key[PageDown]}"  ]] && bindkey -- "${key[PageDown]}"   end-of-buffer-or-history
+[[ -n "${key[Shift-Tab]}" ]] && bindkey -- "${key[Shift-Tab]}"  reverse-menu-complete
+if (( ${+terminfo[smkx]} && ${+terminfo[rmkx]} )); then
+	autoload -Uz add-zle-hook-widget
+	function zle_application_mode_start { echoti smkx }
+	function zle_application_mode_stop { echoti rmkx }
+	add-zle-hook-widget -Uz zle-line-init zle_application_mode_start
+	add-zle-hook-widget -Uz zle-line-finish zle_application_mode_stop
+fi
+
+## 'command not found' (package suggestion) from `pkgfile`
 if [[ -s '/usr/share/doc/pkgfile/command-not-found.zsh' ]]; then
 	source '/usr/share/doc/pkgfile/command-not-found.zsh'
 else
 	echo '`pkgfile` not found, cannot suggest packages'
 fi
 
-# bell off
-unsetopt BEEP
+## load aliases
+if [ -f "$HOME/.zsh_aliases" ]; then source "$HOME/.zsh_aliases"; fi
 
-# disable shell scroll interrupt
-stty -ixon
+# plugins
 
-setopt EXTENDED_HISTORY                 # save start time and duration
-setopt INC_APPEND_HISTORY               # update history when command is issued
-setopt HIST_IGNORE_ALL_DUPS             # hide duplicates in history
-setopt HIST_IGNORE_SPACE                # hide commands starting with spaces
+## external plugins
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#8990b3"
+source "$DOT/shells/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
+source "$DOT/shells/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh"
+source "$DOT/shells/zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh"
+source "$DOT/shells/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh"
 
-# ls_colors
-eval "$(dircolors $DOT/shells/themes/dircolors)"
-
-# bash style word (no '/')
-autoload -U select-word-style
-select-word-style bash
-
-# autocompletion
-autoload -Uz compinit promptinit
-compinit
-promptinit
-_comp_options+=(globdots)
-
-# zoxide (place after 'compinit' for completion)
+## starship
+eval "$(starship init zsh)"
+## zoxide (place after 'compinit' for completion)
 eval "$(zoxide init --cmd cd zsh)"
+## fzf shell integration (need delay due to conflict with zsh-vi-mode)
+zvm_after_init_commands+=('source <(fzf --zsh)')
 
-zstyle -e ':completion:*:default' list-colors 'reply=("${PREFIX:+=(#bi)($PREFIX:t)(?)*==94=34}:${(s.:.)LS_COLORS}")'
-zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' # case insensitive
-zstyle ':completion:*' menu selectzmodload                # use menu
+export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
+  --info=inline \
+  --separator= \
+  --highlight-line \
+  --info=inline-right \
+  --ansi \
+  --layout=reverse \
+  --border=none \
+  --color=16 \
+  --height=10 \
+"
 
-# vi mode
-bindkey -v
-DEFAULT_VI_MODE=viins
-KEYTIMEOUT=1
-stty erase "^?"
-# stty erase "^h"
+export FZF_CTRL_R_OPTS="--height=10 --layout=reverse --info=inline"
+# --color=bg+:#828bb8 \
 
+# key bindings
 
-autoload -U colors && colors
-
-DEFAULT_VI_MODE=viins
-
-# if [ -n "$DOT/shells/zsh/zsh_prompt" ]; then source "$DOT/shells/zsh/zsh_prompt"; fi
-# if [ -n "$DOT/shells/zsh/zsh_reload_scheme" ]; then "$DOT/shells/zsh/zsh_reload_scheme"; fi
-# zvm_after_init_commands+=('[ -f $DOT/shells/zsh/zsh_reload_scheme ] && source $DOT/shells/zsh/zsh_reload_scheme')
-
-# fix zsh-syntax-highlighting
-ZVM_INIT_MODE='sourcing'
-
-# remove underlines for paths
-(( ${+ZSH_HIGHLIGHT_STYLES} )) || typeset -A ZSH_HIGHLIGHT_STYLES
-ZSH_HIGHLIGHT_STYLES[path]=none
-ZSH_HIGHLIGHT_STYLES[path_prefix]=none
-# Plugin Sourcer
-source "$DOT/shells/zsh/plugins/zsh-pluginsourcer/zsh-pluginsourcer.zsh"
-# exec "~/dotfiles/shells/zsh/plugins/zsh-gnome-theme-sync/gnome_theme_monitor.plugin.zsh"
-
-# complete menu mode mappings
-zmodload zsh/complist
-
-# insert mode mappings
-# bindkey '^p' edit-command-line
-bindkey '^b' backward-char
-bindkey '^f' forward-char
-bindkey '^a' beginning-of-line
-bindkey '^e' end-of-line
-bindkey '^i' history-search-forward
-bindkey '^o' history-search-backward
-bindkey '^[[B' history-search-forward
-bindkey '^[[A' history-search-backward
-bindkey '^l' clear-screen
-bindkey '^j' fzf-completion
-bindkey '^k' expand-or-complete
-bindkey '^n' accept-and-infer-next-history
-bindkey '^u' backward-kill-word
-bindkey '^ ' autosuggest-accept
-# ctrl + z to go back to fg/vim (no 'fg' history)
-fancy-ctrl-z () {
+## fancy ctrl-z
+fg-bg-toggle () {
   if [[ $(jobs) ]]; then
     fg
   else
@@ -126,44 +138,35 @@ fancy-ctrl-z () {
     zle clear-screen
   fi
 }
-zle -N fancy-ctrl-z
-bindkey '^Z' fancy-ctrl-z
+zle -N fg-bg-toggle
+bindkey '^Z' fg-bg-toggle
 
+## vi normal mode
+bindkey -a 'H' beginning-of-line
+bindkey -a 'L' end-of-line
 
+## alt + hjkl vim navigation
 bindkey '^[h' vi-backward-char
 bindkey '^[j' history-search-forward
 bindkey '^[k' history-search-backward
 bindkey '^[l' vi-forward-char
-
 bindkey -M menuselect '^[h' vi-backward-char
-bindkey -M menuselect '^[j' vi-down-line-or-history
-bindkey -M menuselect '^[k' vi-up-line-or-history
+bindkey -M menuselect '^[j' down-line-or-history
+bindkey -M menuselect '^[k' up-line-or-history
 bindkey -M menuselect '^[l' vi-forward-char
-bindkey -M menuselect '^[y' accept-search
-bindkey -M menuselect '^[m' accept-search
-bindkey -M menuselect '^y' accept-search
-bindkey -M menuselect '^o' reverse-menu-complete
 
-# normal mode mappings
-bindkey -a 'H' beginning-of-line
-bindkey -a 'L' end-of-line
+## ctrl + jk up/down history/menu
+bindkey -M menuselect '^j' vi-down-line-or-history
+bindkey -M menuselect '^k' vi-up-line-or-history
 
-zvm_after_init_commands+=('bindkey "^i" history-search-forward')
-zvm_after_init_commands+=('bindkey "^o" history-search-backward')
-zvm_after_init_commands+=('bindkey "^n" accept-and-infer-next-history')
-# zvm_after_init_commands+=('FZF_ALT_C_COMMAND= FZF_CTRL_T_COMMAND= source <(fzf --zsh)')
-FZF_ALT_C_COMMAND= FZF_CTRL_T_COMMAND= source <(fzf --zsh)
+bindkey '^i' history-search-forward
+bindkey '^o' history-search-backward
+bindkey '^j' fzf-tab-complete
+bindkey '^k' fzf-tab-complete
 
-function mkcd() {
-  dir=${@:${#@}}
-  mkdir $@ && cd $dir
-}
-
-eval "$(fnm env --use-on-cd)"
-eval "$(starship init zsh)"
-# # per function profiling
-# unsetopt xtrace
-# exec 2>&3 3>&-
-
-# # per command profiling
-# zprof > /tmp/zprof
+## emacs navigation (insert mode)
+bindkey '^b' backward-char
+bindkey '^f' forward-char
+bindkey '^a' beginning-of-line
+bindkey '^e' end-of-line
+bindkey '^n' accept-and-infer-next-history
