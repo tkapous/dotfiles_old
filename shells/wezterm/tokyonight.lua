@@ -1,4 +1,5 @@
 -- same as tokyonight_moon, but with tokyonight_night's background
+-- ~/.local/share/nvim/lazy/tokyonight.nvim/extras/wezterm/tokyonight_moon.toml
 return {
 	tokyonight_soft_moon = {
 		ansi = {
@@ -27,15 +28,14 @@ return {
 		cursor_border = "#c8d3f5",
 		cursor_fg = "#222436",
 		foreground = "#c8d3f5",
-		indexed = {},
-		scrollbar_thumb = "#c4c8da",
+		scrollbar_thumb = "#2f334d",
 		selection_bg = "#2d3f76",
 		selection_fg = "#c8d3f5",
-		split = "#41a6b5",
+		split = "#82aaff",
 		tab_bar = {
 			active_tab = {
-				bg_color = "#41a6b5",
-				fg_color = "#d0d5e3",
+				bg_color = "#82aaff",
+				fg_color = "#1a1b26",
 				intensity = "Normal",
 				italic = false,
 				strikethrough = false,
@@ -43,8 +43,8 @@ return {
 			},
 			background = "#222436",
 			inactive_tab = {
-				bg_color = "#c4c8da",
-				fg_color = "#8990b3",
+				fg_color = "#82aaff",
+				bg_color = "#2f334d",
 				intensity = "Normal",
 				italic = false,
 				strikethrough = false,
@@ -52,24 +52,24 @@ return {
 			},
 			inactive_tab_edge = "#d0d5e3",
 			inactive_tab_hover = {
-				bg_color = "#c4c8da",
-				fg_color = "#41a6b5",
+				fg_color = "#82aaff",
+				bg_color = "#2f334d",
 				intensity = "Normal",
 				italic = false,
 				strikethrough = false,
 				underline = "None",
 			},
 			new_tab = {
-				bg_color = "#e1e2e7",
-				fg_color = "#41a6b5",
+				fg_color = "#82aaff",
+				bg_color = "#222436",
 				intensity = "Normal",
 				italic = false,
 				strikethrough = false,
 				underline = "None",
 			},
 			new_tab_hover = {
-				bg_color = "#e1e2e7",
-				fg_color = "#41a6b5",
+				fg_color = "#82aaff",
+				bg_color = "#222436",
 				intensity = "Bold",
 				italic = false,
 				strikethrough = false,
