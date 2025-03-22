@@ -122,6 +122,8 @@ export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
   --border=none \
   --color=16 \
   --height=10 \
+  --bind 'ctrl-a:select-all'
+  --bind 'ctrl-e:execute(echo {+} | xargs -o $VISUAL)'
 "
 
 export FZF_CTRL_R_OPTS="--height=10 --layout=reverse --info=inline"
