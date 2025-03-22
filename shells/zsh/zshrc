@@ -161,10 +161,20 @@ bindkey -M menuselect '^[l' vi-forward-char
 bindkey -M menuselect '^j' vi-down-line-or-history
 bindkey -M menuselect '^k' vi-up-line-or-history
 
+fzf_tab_complete_or_completion() {
+  local prev_two_chars=${BUFFER:$CURSOR-2:$CURSOR}
+  if [[ ${prev_two_chars} == *\*\* ]]; then
+    zle fzf-completion
+  else
+    zle fzf-tab-complete
+  fi
+}
+zle -N fzf_tab_complete_or_completion
+
+bindkey '^k' fzf_tab_complete_or_completion
+bindkey '^j' fzf_tab_complete_or_completion
 bindkey '^i' history-search-forward
 bindkey '^o' history-search-backward
-bindkey '^j' fzf-tab-complete
-bindkey '^k' fzf-tab-complete
 
 ## emacs navigation (insert mode)
 bindkey '^b' backward-char
