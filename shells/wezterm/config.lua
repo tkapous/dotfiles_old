@@ -29,6 +29,10 @@ M = {
 	},
 	window_background_opacity = 0.9,
 	keys = {
+		{ key = "Enter", mods = "SHIFT|ALT", action = wezterm.action.ToggleFullScreen },
+		{ key = "Enter", mods = "ALT", action = wezterm.action.DisableDefaultAssignment },
+		{ key = "F", mods = "SHIFT|CTRL", action = wezterm.action.DisableDefaultAssignment },
+		{ key = "L", mods = "CTRL", action = wezterm.action.ShowDebugOverlay },
 		{ key = "UpArrow", mods = "SHIFT", action = wezterm.action.ScrollByPage(-0.1) },
 		{ key = "DownArrow", mods = "SHIFT", action = wezterm.action.ScrollByPage(0.1) },
 		{ key = "=", mods = "ALT", action = wezterm.action.EmitEvent("inc-opacity") },
