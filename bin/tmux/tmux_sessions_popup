@@ -6,7 +6,7 @@ session=$(tmux list-sessions -F "#{session_last_attached}--XXXX--#S #{session_pa
 	| sort -rn \
 	| sed 's/.*--XXXX--//'\
 	| column -t\
-	| fzf --tmux 30%,30% --margin=0,1 --color=16 --header-lines=1 --prompt='> ' --reverse --no-info\
+	| fzf --tmux 30%,30% --margin=0,1 --color=16 --header-lines=1 --reverse --no-info --bind 'alt-\:accept' \
 	| column -t\
 	| sed 's/ .*$//')
 
