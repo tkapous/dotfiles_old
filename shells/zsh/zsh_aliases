@@ -519,8 +519,7 @@ alias asciidechex="man ascii 2> /dev/null | grep \"^\ *Tables$\" -A 18 | tail -n
 ### config : app icons
 alias cdapp='cd /usr/share/applications/'
 
-
-alias r='fc -s'
+alias re='fc -s' # repeat last command
 
 ##alias sedtrim="sed -n '1h;1!HOME_42;${;g;s/^[ \t]*//g;s/[ \t]*$//g;p;}'"
 
