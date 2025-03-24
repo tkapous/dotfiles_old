@@ -112,19 +112,7 @@ eval "$(zoxide init --cmd cd zsh)"
 ## fzf shell integration (need delay due to conflict with zsh-vi-mode)
 zvm_after_init_commands+=('source <(fzf --zsh)')
 
-export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
-  --info=inline \
-  --separator= \
-  --highlight-line \
-  --info=inline-right \
-  --ansi \
-  --layout=reverse \
-  --border=none \
-  --color=16 \
-  --height=10 \
-  --bind 'ctrl-a:select-all'
-  --bind 'ctrl-e:execute(echo {+} | xargs -o $VISUAL)'
-"
+export FZF_DEFAULT_OPTS_FILE="$DOT/fzf/fzfrc"
 
 export FZF_CTRL_R_OPTS="--height=10 --layout=reverse --info=inline"
 # --color=bg+:#828bb8 \

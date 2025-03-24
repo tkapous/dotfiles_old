@@ -1,0 +1,16 @@
+#!/bin/sh
+--info=inline
+--separator=
+--highlight-line
+--info=inline-right
+--ansi
+--layout=reverse
+--border=none
+--color=16
+--height=10
+--bind 'alt-h:backward-char'
+--bind 'alt-j:down'
+--bind 'alt-k:up'
+--bind 'alt-l:forward-char'
+--bind 'ctrl-a:select-all'
+--bind 'ctrl-e:execute(echo {+} | xargs -o $VISUAL)'
