@@ -452,6 +452,7 @@ alias pachealth="pacman -Qkk"      # packages integrity
 # alias archup="sudo pacman -Syu && pary -Syu"  # pacman + pary
 
 alias yay="paru "
+alias yaya="yay"
 alias yayup="paru -Syu"             # sync / upgrade
 alias yayi="paru -S"                # install
 alias yayrm="paru -R"               # remove
