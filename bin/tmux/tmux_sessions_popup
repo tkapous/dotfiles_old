@@ -4,7 +4,8 @@ current_session=$(tmux display-message -p '#S')
 
 session=$(tmux list-sessions -F "#{?session_last_attached,#{session_last_attached},0000000000} #S #{session_path}" \
 	| sort -rn \
-	| sed 's/[^ ]*\s\+//'\
+	| sed 's|[^ ]*\s\+||' \
+	| sed 's|^\([^ ]\+\s\+\)'"$HOME"'|\1~|' \
 	| column -t\
 	| fzf \
       --tmux 30%,30% \
