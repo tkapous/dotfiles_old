@@ -16,7 +16,7 @@ session=$(tmux list-sessions -F "#{?session_last_attached,#{session_last_attache
       --header-lines=1 \
       --reverse \
       --no-info \
-      --bind 'alt-\:accept' \
+      --bind 'alt-space:accept' \
       --border=block \
 	| column -t\
 	| sed 's/ .*$//')
