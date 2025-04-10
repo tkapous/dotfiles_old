@@ -168,6 +168,7 @@ alias m="neomutt"
 
 ## pia
 alias piaup="piactl disconnect ; piactl connect"
+alias piaauto="piactl set region auto"
 alias piadown="piactl disconnect"
 alias pias="piactl get connectionstate"
 alias pia="piactl "
