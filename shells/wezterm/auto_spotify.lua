@@ -26,15 +26,12 @@ local function is_any_sound_playing()
 	if not players_handle then
 		return false
 	end
-	wezterm.log_warn("Checking for any sound playing")
 	for player in players_handle:lines() do
-		wezterm.log_warn("|" .. player .. "|")
 		local handle = io.popen("playerctl -p " .. player .. " status")
 		if not handle then
 			return false
 		end
 		local result = handle:read("*a")
-		wezterm.log_warn(result)
 		handle:close()
 		if result:match("Playing") then
 			return true
