@@ -43,6 +43,7 @@ local function is_any_sound_playing()
 end
 
 local function play_spotify()
+	os.execute("notify-send --transient --app-name='Wezterm Auto Spotify' 'Spotify' 'Playing Spotify'")
 	os.execute("playerctl -p spotify play")
 end
 
