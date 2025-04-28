@@ -18,6 +18,17 @@ autoload -Uz add-zsh-hook
 add-zsh-hook -Uz chpwd print_osc7
 print_osc7
 
+## emit osc133 escape sequence (mark prompt)
+# Mark the start of the prompt
+precmd() {
+  printf "\033]133;A\007"
+}
+
+# Mark the end of the prompt
+preexec() {
+  printf "\033]133;B\007"
+}
+
 ## Autocompletion
 autoload -Uz compinit promptinit # load completion
 compinit
