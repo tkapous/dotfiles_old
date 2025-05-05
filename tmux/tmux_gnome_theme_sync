@@ -5,18 +5,28 @@ if [ -z "$DISPLAY" ]; then
   exit 0
 fi
 
-current_theme_mode="light"
-
-dconf watch /org/gnome/desktop/interface/color-scheme | while read -r gnome_theme_mode; do
-  if [[ "$gnome_theme_mode" == "'prefer-dark'" ]]; then
-    if [[ "$current_theme_mode" == "light" ]]; then
-      current_theme_mode="dark"
-      tmux source-file ~/dotfiles/tmux/colors/tokyonight_moon
-    fi
-  elif [[ "$gnome_theme_mode" == "'default'" ]]; then
-    if [[ "$current_theme_mode" == "dark" ]]; then
-      current_theme_mode="light"
-      tmux source-file ~/dotfiles/tmux/colors/tokyonight_day
-    fi
+# Exit if already running (only for direct execution)
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+  if pgrep -f "$(basename "$0")" | grep -v "$$" | grep -v "grep" > /dev/null; then
+    exit 0
   fi
-done
+fi
+
+default_theme="$HOME/dotfiles/tmux/colors/tokyonight_day"
+light_theme="$HOME/dotfiles/tmux/colors/tokyonight_day"
+dark_theme="$HOME/dotfiles/tmux/colors/tokyonight_moon"
+
+switch_theme() {
+  current_theme_mode=$(gsettings get org.gnome.desktop.interface color-scheme | tr -d "'")
+  if [[ "$current_theme_mode" == "prefer-dark" ]]; then
+    tmux source-file "$dark_theme"
+  elif [[ "$current_theme_mode" == "prefer-light" ]]; then
+    tmux source-file "$light_theme"
+  else
+    tmux source-file "$default_theme"
+  fi
+}
+
+(switch_theme && dconf watch /org/gnome/desktop/interface/color-scheme | while read -r gnome_theme_mode; do 
+  switch_theme
+done) &>/dev/null &
