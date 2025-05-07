@@ -8,6 +8,17 @@
   recurse = true
 [push]
   recurseSubmodules = on-demand
+[core]
+	pager = nvim -R -
+[pager]
+	show = nvim -R -
+	color = false
+[pull]
+	rebase = false
+[merge]
+	tool = fugitive
+[mergetool "fugitive"]
+	cmd = vim -f -c "Gvdiffsplit" "$MERGED"
 [alias]
 	ctags = !.git/hooks/ctags
 	cm    = commit -m
@@ -24,14 +35,3 @@
 [color]
 	ui = true
 	pager = false
-[core]
-	pager = nvim -R -
-[pager]
-	show = nvim -R -
-	color = false
-[pull]
-	rebase = false
-[merge]
-	tool = fugitive
-[mergetool "fugitive"]
-	cmd = vim -f -c "Gvdiffsplit" "$MERGED"
