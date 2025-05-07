@@ -21,15 +21,20 @@
 	cmd = vim -f -c "Gvdiffsplit" "$MERGED"
 [alias]
 	ctags = !.git/hooks/ctags
+  s     = status
+  c     = commit
 	cm    = commit -m
-	cam   = commit -am
+	ca    = commit -am
+  a     = add
+  aa    = add --all
 	co    = checkout
 	cob   = checkout -b
-	s     = submodule
-	suu   = submodule update --recursive --force --init --remote
-	sui   = submodule update --init --recursive
-	uuu   = submodule foreach git pull origin master
-	uu    = pull
+	sm    = submodule
+	smu   = submodule update --init --recursive
+	sms   = submodule status
+	sma   = submodule add
+  smp   = submodule foreach git pull origin master
+	p     = pull
   deleted = log --diff-filter=D --summary
   deleted-files = log --diff-filter=D --summary --name-only --no-commit-id
 [color]
