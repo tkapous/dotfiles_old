@@ -1,9 +1,12 @@
 local wezterm = require("wezterm")
+local utils = require("utils")
 
+---@type Config
 local M = wezterm.config_builder() or {}
 
+---@diagnostic disable-next-line: missing-fields
 M = {
-	color_schemes = require("tokyonight"),
+	color_schemes = utils.tbl_deep_extend(require("catppuccin"), require("tokyonight")),
 	enable_wayland = true,
 	line_height = 1.3,
 	window_padding = {
@@ -21,6 +24,7 @@ M = {
 	tab_bar_at_bottom = true,
 	window_decorations = "RESIZE",
 	adjust_window_size_when_changing_font_size = false,
+	---@diagnostic disable-next-line: missing-fields
 	colors = {
 		tab_bar = {
 			background = "rgba(0,0,0,0)",

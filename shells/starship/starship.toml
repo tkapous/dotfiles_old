@@ -119,17 +119,17 @@ symbol = " "
 disabled = false
 
 [username]
-style_user = "fg:bright-blue bg:bright-black"
-style_root = "fg:yellow bg:bright-black"
-format = "[](fg:bright-black)[ $user ]($style)"
+style_user = "fg:bright-blue bg:black"
+style_root = "fg:yellow bg:black"
+format = "[](fg:black)[ $user ]($style)"
 show_always = true
 
 [hostname]
 ssh_only = false
 # trim_at = "."
 ssh_symbol = " "
-format = '[󰍹 $ssh_symbol$hostname]($style)[](fg:bright-black)'
-style = "fg:green bg:bright-black"
+format = '[󰍹 $ssh_symbol$hostname]($style)[](fg:black)'
+style = "fg:green bg:black"
 
 [directory]
 home_symbol = "~"
@@ -188,9 +188,9 @@ threshold = 70
 style = "dimmed white"
 
 [git_branch]
-format = " [](fg:bright-black)[$symbol $branch(:$remote_branch)]($style)[](fg:bright-black)"
+format = " [](fg:black)[$symbol $branch(:$remote_branch)]($style)[](fg:black)"
 symbol = ""
-style = "fg:purple bg:bright-black"
+style = "fg:purple bg:black"
 
 [git_status]
 style = "bright-blue"
