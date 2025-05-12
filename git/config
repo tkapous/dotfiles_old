@@ -21,7 +21,7 @@
 	cmd = vim -f -c "Gvdiffsplit" "$MERGED"
 [alias]
 	ctags = !.git/hooks/ctags
-  s     = status
+  s     = status --short
   c     = commit
 	cm    = commit -m
 	ca    = commit -am
