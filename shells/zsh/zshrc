@@ -181,3 +181,7 @@ bindkey '^f' forward-char
 bindkey '^a' beginning-of-line
 bindkey '^e' end-of-line
 bindkey '^n' accept-and-infer-next-history
+bindkey '^n' accept-and-infer-next-history
+
+autoload edit-command-line; zle -N edit-command-line
+bindkey "^X^E" edit-command-line
