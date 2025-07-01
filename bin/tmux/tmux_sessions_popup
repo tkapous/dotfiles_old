@@ -8,16 +8,13 @@ session=$(tmux list-sessions -F "#{?session_last_attached,#{session_last_attache
 	| sed 's|^\([^ ]\+\s\+\)'"$HOME"'|\1~|' \
 	| column -t\
 	| fzf \
-      --tmux 30%,30% \
       --color=16 \
-      --color=prompt:5,border:0,gutter:0,bg:0,bg+:8,fg+:15 \
-      --header-border='top' \
+      --color=border:1 \
       --pointer=' ' \
       --header-lines=1 \
       --reverse \
       --no-info \
       --bind 'alt-space:accept' \
-      --border=block \
 	| column -t\
 	| sed 's/ .*$//')
 

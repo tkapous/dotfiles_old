@@ -27,6 +27,8 @@ window_current_fg=${fg}
 status_right_bg=${g2}
 status_right_fg=${fg}
 
+set-option -g popup-border-style 'fg='$g2''
+
 # set -g status-left '#{?client_prefix,#[fg='$yw' bg='$g1'],#[fg='$g3' bg='$g1']}'
 set -g status-left '#{?client_prefix,#[fg='$session_bg_cmd' bg='default'],#[fg='$session_bg' bg='default']}'
 set -ga status-left '#{?client_prefix,#[fg='$bg' bg='$session_bg_cmd'],#[fg='$bg' bg='$session_bg']}'
