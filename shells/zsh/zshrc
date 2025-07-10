@@ -117,7 +117,10 @@ source "$DOT/shells/zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh"
 source "$DOT/shells/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh"
 
 ## starship
+#TODO: just write a variation of catppuccin with 'bright' variants (we only do this in neovim)
+export STARSHIP_CONFIG="$HOME/dotfiles/shells/starship/starship${NVIM:+-nvim}.toml"
 eval "$(starship init zsh)"
+
 ## zoxide (place after 'compinit' for completion)
 eval "$(zoxide init --cmd cd zsh)"
 ## fzf shell integration (need delay due to conflict with zsh-vi-mode)

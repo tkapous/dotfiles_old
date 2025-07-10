@@ -3,10 +3,10 @@ $username\
 $hostname\
 $git_branch\
 $directory\
+$localip\
 $fill\
 $time\
 $line_break\
-$localip\
 $shlvl\
 $sudo\
 $shell\
@@ -113,23 +113,23 @@ style = 'green'
 
 [sudo]
 format = "[$symbol]($style)"
-style = "bright-red"
+style = "red"
 symbol = " "
 #     
 disabled = false
 
 [username]
-style_user = "fg:bright-blue bg:black"
+style_user = "fg:purple bg:bright-purple"
 style_root = "fg:yellow bg:black"
-format = "[](fg:black)[ $user ]($style)"
+format = "[](fg:bright-purple)[ $user ]($style)[](fg:bright-purple) "
 show_always = true
 
 [hostname]
 ssh_only = false
 # trim_at = "."
 ssh_symbol = " "
-format = '[󰍹 $ssh_symbol$hostname]($style)[](fg:black)'
-style = "fg:green bg:black"
+format = '[](fg:bright-green)[󰍹 $ssh_symbol$hostname]($style)[](fg:bright-green)'
+style = "fg:green bg:bright-green"
 
 [directory]
 home_symbol = "~"
@@ -137,22 +137,22 @@ truncation_length = 2
 truncation_symbol = " "
 truncate_to_repo = true
 read_only = " "
-style = "white dimmed"
-format = ' [$path]($style)[$read_only]($read_only_style)'
+style = "fg:cyan dimmed bg:bright-cyan"
+format = ' [](fg:bright-cyan)[$path]($style)[$read_only]($read_only_style)[](fg:bright-cyan)'
 
 [status]
 format = "[$symbol]($style)"
-symbol = "[ $status](bright-red)"
+symbol = "[ $status](red)"
 success_symbol = "[ $status](green)"
 disabled = false
-not_executable_symbol = "[](bright-orange) "
+not_executable_symbol = "[](orange) "
 not_found_symbol = "[](purple)"
 sigint_symbol = ""
 signal_symbol = ""
 
 [cmd_duration]
 min_time = 0
-format = " [$symbol$duration](bright-yellow)"
+format = " [$symbol$duration](yellow)"
 
 [jobs]
 format = "[ $symbol$number]($style)"
@@ -161,7 +161,9 @@ symbol = "[▶ ](blue)"
 
 [localip]
 ssh_only = true
-format = " ◯[$localipv4](bold magenta)"
+# format = " [ $localipv4](bold purple)"
+format = ' [](fg:bright-yellow)[ ](fg:yellow bg:bright-yellow)[ $localipv4]($style)[](fg:bright-yellow)'
+style = 'fg:yellow bg:bright-yellow'
 disabled = false
 
 [time]
@@ -188,22 +190,22 @@ threshold = 70
 style = "dimmed white"
 
 [git_branch]
-format = " [](fg:black)[$symbol $branch(:$remote_branch)]($style)[](fg:black)"
+format = " [](fg:bright-blue)[$symbol $branch(:$remote_branch)]($style)[](fg:bright-blue)"
 symbol = ""
-style = "fg:purple bg:black"
+style = "fg:blue bg:bright-blue"
 
 [git_status]
-style = "bright-blue"
+style = "blue"
 format = """([⎪$ahead_behind$staged$modified$untracked$renamed$deleted$conflicted$stashed⎥]($style))"""
-conflicted = "[◪◦](bright-magenta)"
+conflicted = "[◪◦](magenta)"
 ahead = "[▲│[${count}](bold white)│](green)"
 behind = "[▽│[${count}](bold white)│](red)"
-diverged = "[◇ ▲┤[${ahead_count}](regular white)│▽┤[${behind_count}](regular white)│](bright-magenta)"
-untracked = "[◌◦](bright-yellow)"
+diverged = "[◇ ▲┤[${ahead_count}](regular white)│▽┤[${behind_count}](regular white)│](magenta)"
+untracked = "[◌◦](yellow)"
 stashed = "[◦◫◦](white)"
 modified = "[●◦](yellow)"
-staged = "[■┤[$count](bold white)│](bright-cyan)"
-renamed = "[◎◦](bright-blue)"
+staged = "[■┤[$count](bold white)│](cyan)"
+renamed = "[◎◦](blue)"
 deleted = "[✕](red)"
 
 [deno]
@@ -213,7 +215,7 @@ version_format = "${major}.${minor}"
 [lua]
 format = " lua [${symbol}${version}]($style)"
 symbol = "⨀ "
-style = "bright-yellow"
+style = "yellow"
 
 [nodejs]
 format = " node [◫ ($version)](green)"
@@ -222,9 +224,9 @@ version_format = "${major}.${minor}"
 
 [python]
 format = " py [${symbol}${version}]($style)"
-symbol = "[⌉](bright-blue)⌊ "
+symbol = "[⌉](blue)⌊ "
 version_format = "${major}.${minor}"
-style = "bright-yellow"
+style = "yellow"
 
 [ruby]
 format = " rb [${symbol}${version}]($style)"
@@ -242,12 +244,12 @@ style = "red"
 format = " pkg [$symbol$version]($style)"
 version_format = "${major}.${minor}"
 symbol = "◫ "
-style = "bright-yellow"
+style = "yellow"
 
 [swift]
 format = " sw [${symbol}${version}]($style)"
 symbol = "◁ "
-style = "bright-red"
+style = "red"
 version_format = "${major}.${minor}"
 
 [aws]
