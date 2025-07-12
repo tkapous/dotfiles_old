@@ -134,11 +134,10 @@ style = "fg:green bg:bright-green"
 [directory]
 home_symbol = "~"
 truncation_length = 2
-truncation_symbol = " "
 truncate_to_repo = true
 read_only = " "
 style = "fg:cyan dimmed bg:bright-cyan"
-format = ' [](fg:bright-cyan)[$path]($style)[$read_only]($read_only_style)[](fg:bright-cyan)'
+format = ' [](fg:bright-cyan)[  $path]($style)[$read_only]($read_only_style)[](fg:bright-cyan)'
 
 [status]
 format = "[$symbol]($style)"
