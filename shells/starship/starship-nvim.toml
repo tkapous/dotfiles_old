@@ -1,9 +1,9 @@
 format = """
 $username\
 $hostname\
+$localip\
 $git_branch\
 $directory\
-$localip\
 $fill\
 $time\
 $line_break\
@@ -92,8 +92,8 @@ $character\
 # """
 
 right_format = """
-$status\
 $cmd_duration\
+$status\
 """
 
 add_newline = true
@@ -119,30 +119,46 @@ symbol = " "
 disabled = false
 
 [username]
-style_user = "fg:purple bg:bright-purple"
+style_user = "bg:bright-white fg:purple"
+format = "[](fg:purple)[ ](bg:purple fg:black)[ $user ]($style)[](fg:bright-white) "
 style_root = "fg:yellow bg:black"
-format = "[](fg:bright-purple)[ $user ]($style)[](fg:bright-purple) "
+# style_user = "fg:purple bg:bright-purple"
+# format = "[](fg:bright-purple)[ $user ]($style)[](fg:bright-purple) "
 show_always = true
 
 [hostname]
 ssh_only = false
 # trim_at = "."
 ssh_symbol = " "
-format = '[](fg:bright-green)[󰍹 $ssh_symbol$hostname]($style)[](fg:bright-green)'
-style = "fg:green bg:bright-green"
+format = '[](fg:green)[󰍹 ](bg:green fg:black)[ $ssh_symbol$hostname ]($style)[](fg:bright-white)'
+style = "fg:green bg:bright-white"
+# format = '[](fg:bright-green)[󰍹 $ssh_symbol$hostname]($style)[](fg:bright-green)'
+# style = "fg:green bg:bright-green"
 
 [directory]
 home_symbol = "~"
 truncation_length = 2
 truncate_to_repo = true
 read_only = " "
-style = "fg:cyan dimmed bg:bright-cyan"
-format = ' [](fg:bright-cyan)[  $path]($style)[$read_only]($read_only_style)[](fg:bright-cyan)'
+style = "fg:cyan dimmed bg:bright-white"
+format = ' [](fg:cyan)[ ](bg:cyan fg:black)[ $path]($style)[$read_only]($read_only_style)[](fg:bright-white)'
+# style = "fg:cyan dimmed bg:bright-cyan"
+# format = ' [](fg:bright-cyan)[  $path]($style)[$read_only]($read_only_style)[](fg:bright-cyan)'
 
+# [status]
+# format = "[$symbol]($style)"
+# symbol = "[ $status](red)"
+# success_symbol = "[ $status](green)"
+# disabled = false
+# not_executable_symbol = "[](orange) "
+# not_found_symbol = "[](purple)"
+# sigint_symbol = ""
+# signal_symbol = ""
 [status]
-format = "[$symbol]($style)"
-symbol = "[ $status](red)"
-success_symbol = "[ $status](green)"
+style = "bg:black"
+format = "$symbol[ $status]($style)[](fg:black)"
+symbol = "[](fg:red)[ ](fg:black bg:red)"
+success_symbol = "[](fg:green)[ ](fg:black bg:green)"
 disabled = false
 not_executable_symbol = "[](orange) "
 not_found_symbol = "[](purple)"
@@ -151,7 +167,9 @@ signal_symbol = ""
 
 [cmd_duration]
 min_time = 0
-format = " [$symbol$duration](yellow)"
+format = "[](fg:yellow)[ ](fg:black bg:yellow)[ $duration]($style)[](fg:bright-white) "
+style = "bg:bright-white"
+# format = " [$symbol$duration](yellow)"
 
 [jobs]
 format = "[ $symbol$number]($style)"
@@ -161,16 +179,18 @@ symbol = "[▶ ](blue)"
 [localip]
 ssh_only = true
 # format = " [ $localipv4](bold purple)"
-format = ' [](fg:bright-yellow)[ ](fg:yellow bg:bright-yellow)[ $localipv4]($style)[](fg:bright-yellow)'
-style = 'fg:yellow bg:bright-yellow'
+format = ' [](fg:yellow)[ ](fg:black bg:yellow)[ $localipv4]($style)[](fg:bright-white)'
+style = 'fg:yellow bg:bright-white'
 disabled = false
 
 [time]
 disabled = false
-format = "[ $time ]($style)"
+format = "[](fg:blue)[ ](fg:black bg:blue)[ $time ]($style)[](fg:bright-white) "
+style = "bg:bright-white"
+# format = "[ $time ]($style)"
+# style = "dimmed white"
 time_format = "%T"
 utc_time_offset = "local"
-style = "dimmed white"
 
 [battery]
 format = "[ $percentage $symbol]($style)"
@@ -189,9 +209,11 @@ threshold = 70
 style = "dimmed white"
 
 [git_branch]
-format = " [](fg:bright-blue)[$symbol $branch(:$remote_branch)]($style)[](fg:bright-blue)"
+format = " [](fg:blue)[$symbol ](fg:black bg:blue)[ $branch(:$remote_branch)]($style)[](fg:bright-white)"
+style = "fg:blue bg:bright-white"
 symbol = ""
-style = "fg:blue bg:bright-blue"
+# format = " [](fg:bright-blue)[$symbol $branch(:$remote_branch)]($style)[](fg:bright-blue)"
+# style = "fg:blue bg:bright-blue"
 
 [git_status]
 style = "blue"
