@@ -113,7 +113,6 @@ if [ -f "$HOME/.zsh_aliases" ]; then source "$HOME/.zsh_aliases"; fi
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#8990b3"
 source "$DOT/shells/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
 source "$DOT/shells/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh"
-source "$DOT/shells/zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh"
 source "$DOT/shells/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh"
 
 ## starship
@@ -123,8 +122,9 @@ eval "$(starship init zsh)"
 
 ## zoxide (place after 'compinit' for completion)
 eval "$(zoxide init --cmd cd zsh)"
-## fzf shell integration (need delay due to conflict with zsh-vi-mode)
-zvm_after_init_commands+=('source <(fzf --zsh)')
+
+## fzf shell integration
+source <(fzf --zsh)
 
 export FZF_DEFAULT_OPTS_FILE="$DOT/fzf/fzfrc"
 
