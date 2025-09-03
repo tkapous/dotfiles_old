@@ -156,10 +156,10 @@ format = ' [](fg:cyan)[ ](bg:cyan fg:black)[ $path]($style)[$read_only]($r
 # sigint_symbol = ""
 # signal_symbol = ""
 [status]
-style = "bg:black"
-format = "$symbol[ $status]($style)[](fg:black)"
-symbol = "[](fg:red)[ ](fg:black bg:red)"
-success_symbol = "[](fg:green)[ ](fg:black bg:green)"
+style = "bg:bright-white"
+format = "$symbol[ $status]($style)[](fg:bright-white)"
+symbol = "[](fg:red)[ ](fg:bright-white bg:red)"
+success_symbol = "[](fg:green)[ ](fg:bright-white bg:green)"
 disabled = false
 not_executable_symbol = "[](orange) "
 not_found_symbol = "[](purple)"
