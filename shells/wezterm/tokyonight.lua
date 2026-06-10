@@ -62,7 +62,7 @@ return {
   },
   tokyonight_day = {
     foreground = "#3760bf",
-    background = "#e1e2e7",
+    background = "#ffffff",
     cursor_bg = "#3760bf",
     cursor_border = "#3760bf",
     cursor_fg = "#e1e2e7",
