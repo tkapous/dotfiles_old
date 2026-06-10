@@ -7,6 +7,6 @@ local custom_frappe = wezterm.color.get_builtin_schemes()["Catppuccin Frappe"]
 custom_frappe.background = "#1e1e2e"
 
 return {
-	["Catppuccin Latte"] = custom_latte,
-	["Catppuccin Frappe"] = custom_frappe,
+  ["Catppuccin Latte"] = custom_latte,
+  ["Catppuccin Frappe"] = custom_frappe,
 }

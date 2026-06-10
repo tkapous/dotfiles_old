@@ -113,7 +113,7 @@ if [ -f "$HOME/.zsh_aliases" ]; then source "$HOME/.zsh_aliases"; fi
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#8990b3"
 source "$DOT/shells/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
 source "$DOT/shells/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh"
-source "$DOT/shells/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh"
+source "$DOT/shells/zsh/plugins/fzf-tab/fzf-tab.zsh"
 
 ## starship
 #TODO: just write a variation of catppuccin with 'bright' variants (we only do this in neovim)
